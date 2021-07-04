@@ -1,0 +1,44 @@
+.close {
+    width: 30px;
+    height: 30px;
+    box-shadow: 0px 10 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    background: #228ab3;
+    margin: 20px auto;
+    position: relative;
+    display: block;
+    z-index: 200;
+    text-indent: -9999px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.close:before,
+.close:after {
+    content: '';
+    width: 80%;
+    height: 3px;
+    background: #bde5f1;
+    position: absolute;
+    top: 48%;
+    left: 10%;
+    transform: rotate(45deg);
+    transition: all 0.3s ease-out;
+}
+
+.close:after {
+    transform: rotate(-45deg);
+    transition: all 0.3s ease-out;
+}
+
+.close:hover:before,
+.close:hover:after {
+    transform: rotate(180deg);
+    background: #FFF;
+}
+.btnDiv {
+    display: flex;
+}
+.btnDiv input {
+    height: 30px;
+}

@@ -13,7 +13,7 @@ export default class App extends Component {
     const persistedContacts = localStorage.getItem('contacts');
     if (persistedContacts) {
       this.setState({
-        contacts: JSON.parse(persistedContacts)
+        contacts:  JSON.parse(persistedContacts)
       })
     }
     
@@ -56,6 +56,9 @@ export default class App extends Component {
       }
     })
   }
+  clearFilter = () => {
+    this.setState({filter: ''})
+  }
 
 
 
@@ -66,7 +69,7 @@ export default class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <AddSection  onNewContact={this.newContact} />
-        <Filter value={this.state.filter} handleFilterChange={this.handleFilterChange} />
+        <Filter value={this.state.filter} handleFilterChange={this.handleFilterChange} clearFilter={this.clearFilter} />
         <ContactSection contacts={visibleConstacts} handleFilterChange={this.handleFilterChange} deleteContact={this.deleteContact} />
       </div>
     )
