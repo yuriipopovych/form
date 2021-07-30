@@ -1,14 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import contactsAction from '../../../redux/contactsAction';
 
-export default function ContactSection({ contacts, deleteContact}) {
+
+const ContactSection = ({ contacts, deleteContact}) => {
     return (
         <div>
             
             <ul>
-                {contacts.map((contact) => <li key={contact.name} >{contact.name}: {contact.number} <button onClick={deleteContact} value={contact.name}>Delete</button></li>)}
+                {contacts.map(({name, number, id}) => <li key={id}>{name}: {number}<button onClick={()=>deleteContact(id)} value={name} id={id}>Delete</button></li>)}
             </ul>
             
             
         </div>
     )
 }
+const mapStateToProps = state => {
+    const { contacts, filter } = state.contactsBook;
+    const visibleConstacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase()))
+    return {
+        contacts: visibleConstacts
+    }
+}
+const mapDispatchToProps = {
+    deleteContact: contactsAction.removeContact
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactSection);

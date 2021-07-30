@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import contactsAction from '../../../redux/contactsAction';
 import styles from './AddSection.module.css';
 
-export default class AddSection extends Component {
+class AddSection extends Component {
     state = {
         name: '',
         number: ''
@@ -13,7 +15,8 @@ export default class AddSection extends Component {
    
     addContact = (e) => {
         e.preventDefault();
-        this.props.onNewContact(this.state.name, this.state.number);
+        this.props.onAddContact(this.state.name, this.state.number);
+        // this.props.onNewContact(this.state.name, this.state.number);
         this.setState({
             name: '',
             number: ''
@@ -34,6 +37,10 @@ export default class AddSection extends Component {
         )
     }
 }
+const mapDispatchToProps = {
+    onAddContact: contactsAction.addContact
+}
+export default connect(null, mapDispatchToProps)(AddSection);
 
 
 
